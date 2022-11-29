@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class RankingResDto {
+    private final Long rank;
     private final String name;
     private final double score;
 }

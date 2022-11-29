@@ -29,6 +29,7 @@ public class RankService {
         Set<ZSetOperations.TypedTuple<String>> typedTuples = zSetOperations.reverseRangeWithScores(key, 0, 10);
         return typedTuples.stream()
                 .map(v -> RankingResDto.builder()
+                        .rank(getMyRank(v.getValue()))
                         .name(v.getValue())
                         .score(v.getScore())
                         .build())
