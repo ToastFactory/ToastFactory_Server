@@ -1,6 +1,6 @@
 package com.konkuk.toastfactory.common;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
