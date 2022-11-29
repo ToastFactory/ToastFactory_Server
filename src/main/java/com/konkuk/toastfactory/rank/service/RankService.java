@@ -23,19 +23,28 @@ public class RankService {
         redisTemplate.opsForZSet().add("ranking", name, score);
     }
 
+    /**
+     * 1위부터 10위까지의 랭킹을 보여준다.
+     * @return rank, name, score 정보를 랭킹이 높은 순서 가지고 있다.
+     * */
     public List<RankingResDto> getRankingList() {
         String key = "ranking";
         ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
         Set<ZSetOperations.TypedTuple<String>> typedTuples = zSetOperations.reverseRangeWithScores(key, 0, 10);
+
         return typedTuples.stream()
                 .map(v -> RankingResDto.builder()
-                        .rank(getMyRank(v.getValue()))
+                        .rank(getMyRank(v.getValue()))  // 각 사용자의 랭킹을 계산
                         .name(v.getValue())
                         .score(v.getScore())
                         .build())
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 원하는 사용자의 랭킹을 보여준다.
+     * @return 사용자의 랭킹
+     * */
     public Long getMyRank(String name){
         Long ranking = 0L;
         Double memberScore = redisTemplate.opsForZSet().score("ranking", name);

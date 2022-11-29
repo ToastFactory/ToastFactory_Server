@@ -1,5 +1,6 @@
 package com.konkuk.toastfactory.rank.controller;
 
+import com.konkuk.toastfactory.rank.constant.Constant;
 import com.konkuk.toastfactory.rank.dto.RankingResDto;
 import com.konkuk.toastfactory.rank.service.RankService;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,9 @@ public class RankController {
 
     /** 점수 설정 api */
     @PatchMapping("/score")
-    public void setScore(@RequestParam("name") String name, @RequestParam("score") int score) {
+    public String setScore(@RequestParam("name") String name, @RequestParam("score") int score) {
         rankService.create(name,score);
+        return Constant.saveScoreOutput;
     }
 
     /** 점수 List 가져오기 api */
@@ -31,7 +33,6 @@ public class RankController {
     /** 멤버별 점수 가져오기 api */
     @GetMapping("/my")
     public Long getMyRanking(@RequestParam("name") String name) {
-        System.out.println("name = " + name);
         return rankService.getMyRank(name);
     }
 
