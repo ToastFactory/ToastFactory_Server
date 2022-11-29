@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class BaseException {
     private final BaseResponseStatus status;
 }

@@ -32,14 +32,19 @@ public class RankService {
 
     /**
      * 1위부터 10위까지의 랭킹을 보여준다.
+     * @param offset paging 처리를 위한 offset. 0부터 시작한다.
      * @return rank, name, score 정보를 랭킹이 높은 순서 가지고 있다.
      * */
-    public List<RankingResDto> getRankingList() {
+    public List<RankingResDto> getRankingList(long offset) {
         String key = "ranking";
-        ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<String>> typedTuples = zSetOperations.reverseRangeWithScores(key, 0, 10);
+        final Long min = 0L;
+        final Long max = 1000000000L;
+        final Long count = 10L;
 
-        return typedTuples.stream()
+        ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
+        Set<ZSetOperations.TypedTuple<String>> typedTuplesOffset = zSetOperations.reverseRangeByScoreWithScores(key, min, max, (offset * count), count);
+
+        return typedTuplesOffset.stream()
                 .map(v -> RankingResDto.builder()
                         .rank(getMyRank(v.getValue()))  // 각 사용자의 랭킹을 계산
                         .name(v.getValue())
