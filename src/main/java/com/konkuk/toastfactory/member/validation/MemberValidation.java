@@ -18,7 +18,7 @@ public class MemberValidation {
 
     public void nameDuplicateValidation(String name) throws BaseException {
         Optional<Member> memberByNameAndStatus = memberRepository.findByNameAndStatus(name, Status.ACTIVE);
-        if (memberByNameAndStatus.isEmpty()) {
+        if (!memberByNameAndStatus.isEmpty()) {
             throw new BaseException(BaseResponseStatus.DUPLICATE_NAME);
         }
     }

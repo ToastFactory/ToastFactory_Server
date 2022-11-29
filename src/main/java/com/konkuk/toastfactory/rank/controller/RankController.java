@@ -2,6 +2,8 @@ package com.konkuk.toastfactory.rank.controller;
 
 import com.konkuk.toastfactory.config.BaseResponse;
 import com.konkuk.toastfactory.constant.Constant;
+import com.konkuk.toastfactory.member.entity.Member;
+import com.konkuk.toastfactory.member.service.MemberService;
 import com.konkuk.toastfactory.rank.dto.RankingResDto;
 import com.konkuk.toastfactory.rank.service.RankService;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +19,13 @@ import java.util.List;
 public class RankController {
 
     private final RankService rankService;
+    private final MemberService memberService;
 
     /** 점수 설정 api */
     @PatchMapping("/score")
-    public BaseResponse<String> setScore(@RequestParam("name") String name, @RequestParam("score") int score) {
+    public BaseResponse<String> setScore(@RequestParam("name") String name, @RequestParam("score") Long score) {
         rankService.create(name,score);
+        memberService.patchMemberScore(name,score);
         return new BaseResponse<>(Constant.saveScoreOutput);
     }
 

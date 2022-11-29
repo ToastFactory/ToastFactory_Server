@@ -26,7 +26,7 @@ public class RankService {
     private final RedisTemplate redisTemplate;
 
     @Transactional
-    public void create(String name , int score) {
+    public void create(String name , Long score) {
         redisTemplate.opsForZSet().add("ranking", name, score);
     }
 
