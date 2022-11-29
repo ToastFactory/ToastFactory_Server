@@ -12,6 +12,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * [Java = Redis ZSET]
+ * VariableName = key
+ * Key = value
+ * Value = score
+ * */
+
 @Service
 @RequiredArgsConstructor
 public class RankService {
