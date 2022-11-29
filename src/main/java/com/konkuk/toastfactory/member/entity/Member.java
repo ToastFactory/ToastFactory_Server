@@ -23,6 +23,9 @@ public class Member extends BasicEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "score")
     private Long score;
     
