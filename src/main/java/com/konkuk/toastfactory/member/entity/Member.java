@@ -28,5 +28,10 @@ public class Member extends BasicEntity {
 
     @Column(name = "score")
     private Long score;
-    
+
+    public Member(String name, String password) {
+        this.name = name;
+        this.password = password;
+        this.score = 0L;
+    }
 }

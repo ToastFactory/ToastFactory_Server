@@ -1,7 +1,7 @@
 package com.konkuk.toastfactory.rank.controller;
 
 import com.konkuk.toastfactory.config.BaseResponse;
-import com.konkuk.toastfactory.rank.constant.Constant;
+import com.konkuk.toastfactory.constant.Constant;
 import com.konkuk.toastfactory.rank.dto.RankingResDto;
 import com.konkuk.toastfactory.rank.service.RankService;
 import lombok.RequiredArgsConstructor;
