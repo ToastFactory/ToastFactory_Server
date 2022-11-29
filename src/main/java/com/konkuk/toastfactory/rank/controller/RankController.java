@@ -22,10 +22,17 @@ public class RankController {
         rankService.create(name,score);
     }
 
-    /** 점수 설정 api */
+    /** 점수 List 가져오기 api */
     @GetMapping("")
     public List<RankingResDto> getRanking() {
         return rankService.getRankingList();
+    }
+
+    /** 멤버별 점수 가져오기 api */
+    @GetMapping("/my")
+    public Long getMyRanking(@RequestParam("name") String name) {
+        System.out.println("name = " + name);
+        return rankService.getMyRank(name);
     }
 
 }
