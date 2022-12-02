@@ -39,10 +39,9 @@ public class RankService {
         String key = "ranking";
         final Long min = 0L;
         final Long max = 1000000000L;
-        final Long count = 10L;
 
         ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<String>> typedTuplesOffset = zSetOperations.reverseRangeByScoreWithScores(key, min, max, (offset * count), count);
+        Set<ZSetOperations.TypedTuple<String>> typedTuplesOffset = zSetOperations.reverseRangeByScoreWithScores(key, min, max);
 
         return typedTuplesOffset.stream()
                 .map(v -> RankingResDto.builder()
