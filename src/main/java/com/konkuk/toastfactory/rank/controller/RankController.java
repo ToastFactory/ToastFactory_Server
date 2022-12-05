@@ -37,8 +37,8 @@ public class RankController {
 
     /** 멤버별 점수 가져오기 api */
     @GetMapping("/my")
-    public BaseResponse<Long> getMyRanking(@RequestParam("name") String name) {
-        return new BaseResponse<>(rankService.getMyRank(name));
+    public BaseResponse<RankingResDto> getMyRanking(@RequestParam("name") String name) {
+        return new BaseResponse<>(rankService.getMyRankingInfo(name));
     }
 
 }
