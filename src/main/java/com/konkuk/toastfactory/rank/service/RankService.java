@@ -31,7 +31,7 @@ public class RankService {
     }
 
     /**
-     * 1위부터 10위까지의 랭킹을 보여준다.
+     * 전체 랭킹을 보여준다.
      * @param offset paging 처리를 위한 offset. 0부터 시작한다.
      * @return rank, name, score 정보를 랭킹이 높은 순서 가지고 있다.
      * */
@@ -52,11 +52,22 @@ public class RankService {
                 .collect(Collectors.toList());
     }
 
+    public RankingResDto getMyRankingInfo(String name) {
+        Double myScore = redisTemplate.opsForZSet().score("ranking", name);
+        Long myRank = getMyRank(name);
+
+        return RankingResDto.builder()
+                .name(name)
+                .rank(myRank)
+                .score(myScore)
+                .build();
+    }
+
     /**
      * 원하는 사용자의 랭킹을 보여준다.
      * @return 사용자의 랭킹
      * */
-    public Long getMyRank(String name){
+    public Long getMyRank(String name) {
         Long ranking = 0L;
         Double memberScore = redisTemplate.opsForZSet().score("ranking", name);
         Set<String> highestMemberInEqualScore = redisTemplate.opsForZSet().reverseRangeByScore("ranking", memberScore, memberScore, 0, 1);
