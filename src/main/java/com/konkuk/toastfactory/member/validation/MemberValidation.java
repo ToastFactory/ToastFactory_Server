@@ -22,4 +22,19 @@ public class MemberValidation {
             throw new BaseException(BaseResponseStatus.DUPLICATE_NAME);
         }
     }
+
+    public void memberNameValidation(String name) throws BaseException {
+        Optional<Member> member = memberRepository.findByNameAndStatus(name, Status.ACTIVE);
+        if (member.isEmpty()) {
+            throw new BaseException(BaseResponseStatus.INVALID_MEMBER);
+        }
+    }
+
+    public void passwordValidation(String name, String password) throws BaseException {
+        Optional<Member> member = memberRepository.findByNameAndStatus(name, Status.ACTIVE);
+        if (!member.get().getPassword().equals(password)) {
+            throw new BaseException(BaseResponseStatus.INVALID_PW);
+        }
+    }
+
 }

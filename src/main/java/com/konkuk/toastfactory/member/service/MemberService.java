@@ -32,4 +32,10 @@ public class MemberService {
         member.get().setScore(score);
         memberRepository.save(member.get());
     }
+
+    public void loginMember(String name, String password) throws BaseException{
+        memberValidation.memberNameValidation(name);
+        memberValidation.passwordValidation(name,password);
+    }
+
 }

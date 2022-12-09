@@ -8,7 +8,8 @@ public enum BaseResponseStatus {
 
     DUPLICATE_NAME(false,2001,"이미 존재하는 이름입니다."),
     INVALID_MEMBER(false,2002,"존재하지 않는 유저입니다."),
-    NOT_YET_START(false,2003,"게임을 한번도 시작하지 않은 유저입니다.");
+    NOT_YET_START(false,2003,"게임을 한번도 시작하지 않은 유저입니다."),
+    INVALID_PW(false,2004,"잘못된 비밀번호입니다.");
 
 
     private final boolean isSuccess;
