@@ -30,4 +30,16 @@ public class MemberController {
         }
         return new BaseResponse<>(Constant.postMemberInfoOutput);
     }
+
+    /** 로그인 api */
+    @PostMapping("/login")
+    public BaseResponse<String> postLogin(@RequestBody PostMemberInfoReq postMemberInfoReq) {
+        try {
+            memberService.loginMember(postMemberInfoReq.getName(), postMemberInfoReq.getPassword());
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+        return new BaseResponse<>(Constant.postLoginOutput);
+    }
+
 }
