@@ -5,6 +5,7 @@ public class Constant {
     // Member
     // Output
     public static final String postMemberInfoOutput = "회원가입에 성공하였습니다.";
+    public static final String postLoginOutput = "로그인에 성공하였습니다.";
 
 
     // Rank
